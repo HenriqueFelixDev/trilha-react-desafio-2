@@ -3,8 +3,15 @@ import styled from "styled-components";
 export const ItemContainer = styled.div`
     border-bottom: thin solid #FAFAFA20;
     padding: 1rem 0.5rem;
+
     display: flex;
-    align-items: center;
+    flex-direction: column;
+    gap: 0.5rem;
+    
+    @media (min-width: 768px) {
+        flex-direction: row;
+        align-items: center;
+    }
 `
 
 export const RepoContent = styled.div`
@@ -36,7 +43,7 @@ export const RepositoryName = styled.p`
 export const RepositoryLink = styled.a`
     color: inherit;
     margin: 0.5rem;
-    padding: 0.5rem;
+    padding: 0.25rem;
 `
 
 export const RemoveButton = styled.button`
@@ -44,5 +51,5 @@ export const RemoveButton = styled.button`
     background: transparent;
     border: none;
     cursor: pointer;
-    padding: 0.5rem;
+    padding: 0.25rem;
 `

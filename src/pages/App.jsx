@@ -83,6 +83,7 @@ export const App = () => {
       <Logo src={gitLogo} alt="github logo" />
 
       <Input
+        placeholder="Digite um repositório (ex: HenriqueFelixDev/trilha-react-desafio-2"
         value={search}
         onChange={(e) => setSearch(e.target.value)} 
       />
