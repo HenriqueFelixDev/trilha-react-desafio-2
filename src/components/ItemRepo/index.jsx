@@ -15,19 +15,19 @@ export const ItemRepo = ({repo, handleRemoveRepo}) => {
 
           <UserData>
             <UserAvatar
-              src={repo.owner.avatar_url}
-              alt={`Avatar do usuário ${repo.owner.login}`}
+              src={repo.user.avatar}
+              alt={`Avatar do usuário ${repo.user.username}`}
             />
 
             <RepositoryName>
-              {repo.full_name}
+              {repo.fullname}
             </RepositoryName>
           </UserData>
         </RepoContent>
 
         <div>
           <RepositoryLink
-            href={repo.html_url}
+            href={repo.url}
             rel="noreferrer noopener"
             target="_blank"
             aria-label="Ver repositório"

@@ -4,13 +4,14 @@ import gitLogo from '../assets/github.png'
 import { Alert, Button, Input, ItemRepo, Loading } from '../components';
 import { Container, Logo } from './styles';
 import { api } from '../services/api';
+import { getLocalRepositories, saveRepositoriesLocally } from '../services/repoLocalPersistence';
 
 export const App = () => {
 
   const [state, setState] = useState({
     loading: false,
     error: null,
-    repositories: []
+    repositories: getLocalRepositories()
   });
 
   const [search, setSearch] = useState('');
@@ -34,19 +35,36 @@ export const App = () => {
       setState(prev => {
         const alreadInArray = state.repositories.some(repo => repo.id === data.id);
 
-        const repositories = alreadInArray
-            ? prev.repositories
-            : [ ...prev.repositories, data]
+        if (alreadInArray) {
+          return {
+            ...prev,
+            loading: false,
+            error: 'O repositório já foi adicionado à lista',
+          }
+        }
+
+        const newRepository = {
+          id: data.id,
+          name: data.name,
+          fullname: data.full_name,
+          url: data.html_url,
+          user: {
+            avatar: data.owner.avatar_url,
+            username: data.owner.login,
+          }
+        }
+
+        const repositories = [
+          ...prev.repositories,
+          newRepository
+        ]
         
-        const error = alreadInArray
-            ? 'O repositório já foi adicionado à lista'
-            : null
+        saveRepositoriesLocally(repositories)
 
         return {
           ...prev,
           repositories,
-          loading: false,
-          error
+          loading: false
         }
       })
     } catch (e) {
@@ -69,6 +87,8 @@ export const App = () => {
     setState(prev => {
       const repositories = prev.repositories
           .filter(repo => repo.id !== id)
+
+      saveRepositoriesLocally(repositories)
       
       return {
         ...prev,
