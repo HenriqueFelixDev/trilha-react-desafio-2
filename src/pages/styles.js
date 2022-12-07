@@ -1,13 +1,20 @@
 import styled from "styled-components";
 
-export const Container = styled.div`
+export const Container = styled.main`
     width: 100%;
-    height: 90vh;
+    max-width: 600px;
 
-    margin: 20px 0 0 0;
+    margin: 3rem auto;
+    padding: 1rem;
 
-    display:flex;
+    display: flex;
     flex-direction: column;
-    align-items: center;
-    justify-content: flex-start;
+    gap: 0.5rem;
+`
+
+export const Logo = styled.img`
+    display: block;
+    width: 72px;
+    height: 72px;
+    margin: 0 auto;
 `
